@@ -1,0 +1,34 @@
+﻿@model Product
+
+
+<div class="card card-columns m-1 p-1">
+    <div class="bg-light p-1 border">
+        <h4>
+            @Model.Name @*Где-то тут добавить место для изображения объектов. *@
+            
+        </h4>
+    </div>
+    <form id="@Model.ProductID" asp-action="AddToCart"
+          asp-controller="Cart" method="post">
+        <input type="hidden" asp-for="ProductID" />
+
+        <div class="card p-2 text-center">
+            <img class="card-img-top" src="@Url.Content("~/images/items/" + @Model.Image)" alt="" asp-append-version="true" />
+            <span class="badge badge-pill badge-warning mt-1" style="float:right">
+                <h3>@Model.Price.ToString("c")</h3>
+            </span>
+        </div>
+
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+        
+
+        <div class="border">
+            <button type="submit"
+                    class="btn btn-success pull-right m-1" style="float:right">
+                Add To Cart
+            </button>
+            <a asp-controller="product" asp-action="details" asp-route-id="@Model.ProductID"
+               class="btn btn-success m-1">Details</a>
+        </div>
+    </form>
+</div>

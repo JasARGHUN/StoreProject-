@@ -1,0 +1,37 @@
+﻿@model Product
+@{ 
+    ViewBag.Title = "Employee Details";
+}
+
+    <div class="card card-columns m-1 p-1" >
+        <form id="@Model.ProductID" asp-action="AddToCart"
+              asp-controller="Cart" method="post">
+            <input type="hidden" asp-for="@Model.ProductID"/>
+                <div class="card">
+                    <div class="card-header">
+                        <h1>@Model.Name</h1>
+                    </div>
+
+                    <div class="card-body text-center">
+                        <img class="card-img-top" src="@Url.Content("~/images/items/" + @Model.Image)" asp-append-version="true" />
+                        <h4>Category: @Model.Category</h4>
+                        <h4>Price: @Model.Price</h4>
+                        <hr />
+                        <div class="card-text text-center">
+                            <h5>@Model.Description</h5>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+
+                    <div class="m-1">
+                        <hr />
+                        <button type="submit"
+                                class="btn btn-success m-1" style="float:left">
+                            Add To Cart
+                        </button>
+                        <a asp-action="List" asp-controller="Product" class="btn btn-success m-1" style="float:right">Back</a>
+                    </div>
+                </div>
+        </form>
+    </div>

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<string>
+
+<a class="btn btn-block btn-secondary border mb-1"
+   asp-action="List"
+   asp-controller="Product"
+   asp-route-category="">Home</a>
+
+<div>
+    @foreach (string category in Model)
+    {
+        <a class="btn btn-sm btn-block border @(category == ViewBag.SelectedCategory ? "btn-info": "btn-light")"
+           asp-action="List"
+           asp-controller="Product"
+           asp-route-category="@category"
+           asp-route-productPage="1">@category</a>
+    }
+</div>
